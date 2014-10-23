@@ -1005,7 +1005,7 @@ struct AVIWriter : public IVideoWriter
       // Reference: vp6_parse_header from libavcodec's vp6.c
 
       int skip = (_codecID == 4) ? 1 : 4;
-      if (chunk.size() < (skip + 8)) return;
+      if (int(chunk.size()) < (skip + 8)) return;
       uint64_t x = BitConverterBE::ToUInt64(chunk, skip);
 
       int deltaFrameFlag = BitHelper::Read(x, 1);
