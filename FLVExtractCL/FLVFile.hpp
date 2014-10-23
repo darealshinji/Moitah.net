@@ -1009,11 +1009,8 @@ struct AVIWriter : public IVideoWriter
       uint64_t x = BitConverterBE::ToUInt64(chunk, skip);
 
       int deltaFrameFlag = BitHelper::Read(x, 1);
-      int quant = BitHelper::Read(x, 6);
       int separatedCoeffFlag = BitHelper::Read(x, 1);
-      int subVersion = BitHelper::Read(x, 5);
       int filterHeader = BitHelper::Read(x, 2);
-      int interlacedFlag = BitHelper::Read(x, 1);
 
       if (deltaFrameFlag != 0)
       {
@@ -1193,7 +1190,7 @@ struct FLVFile
 
   void ExtractStreams(bool extractAudio, bool extractVideo, bool extractTimeCodes, OverwriteDelegate const & overwrite)
   {
-    uint32_t dataOffset, flags, prevTagSize;
+    uint32_t dataOffset;
     _outputPathBase = (boost::filesystem::path(_outputDirectory) / boost::filesystem::path(_inputPath).stem()).string();
     _overwrite = overwrite;
     _extractAudio = extractAudio;
@@ -1219,17 +1216,14 @@ struct FLVFile
     if (!boost::filesystem::is_directory(_outputDirectory))
       throw std::runtime_error("Output directory doesn't exist.");
 
-    flags = ReadUInt8();
     dataOffset = ReadUInt32();
 
     Seek(dataOffset);
 
-    prevTagSize = ReadUInt32();
     while (_fileOffset < _fileLength)
     {
       if (!ReadTag()) break;
       if ((_fileLength - _fileOffset) < 4) break;
-      prevTagSize = ReadUInt32();
     }
 
     _averageFrameRate = CalculateAverageFrameRate();
@@ -1367,7 +1361,7 @@ struct FLVFile
   
   bool ReadTag()
   {
-    uint32_t tagType, dataSize, timeStamp, streamID, mediaInfo;
+    uint32_t tagType, dataSize, timeStamp, mediaInfo;
     std::vector<byte> data;
 
     if ((_fileLength - _fileOffset) < 11)
@@ -1380,7 +1374,6 @@ struct FLVFile
     dataSize = ReadUInt24();
     timeStamp = ReadUInt24();
     timeStamp |= ReadUInt8() << 24;
-    streamID = ReadUInt24();
 
     // Read tag data
     if (dataSize == 0)
