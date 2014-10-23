@@ -1,0 +1,82 @@
+1.4.5 (2012-Sep-02):
+  * Ability to export custom quantization matrix to .cqm file.
+  * Fixed window layout with high DPI settings.
+  * Supports loading on .NET 4.x runtime (not required; still 2.0 compatible).
+1.4.4 (2007-Jan-13):
+  * Fixed a few small issues that prevented DivX subtitles from working.
+  * Added *.divx to the supported extension list in the file dialogs.
+  * A default file name is now provided when saving.
+1.4.3 (2006-Nov-05):
+  * Doesn't remove delay frames anymore, this caused synch problems with joined
+    videos.
+  * FourCC and user data information are now shown in the "Video Info" text.
+  * It's now possible to pack videos containing drop frames.
+1.4.2 (2006-Sep-16):
+  * Fixed several problems with OpenDML reading/writing (writing bad OpenDML
+    index entries, out of memory exception or unnecessary reading when loading,
+    incomplete loading of files with damaged/missing index).
+1.4.1 (2006-Aug-04):
+  * Fixed some problems with packing which also required corrections to the
+    timestamp calculation code.
+  * If you try to load a non-MPEG4 video, the error message now displays which
+    codec the file uses.
+  * Better default directories for load/save file dialogs.
+1.4.0 (2006-Aug-03):
+  * AVI handling code completely rewritten, supports OpenDML and incomplete
+    files (rebuilds the index including keyframe flags).
+  * Ability to add/readd packed bitstream.
+  * Optimized some parts, runs significantly faster.
+  * Added Cancel button on load/save progress window.
+  * Doesn't freeze explorer while loading a file after dropping onto the source
+    textbox.
+  * Updated code to take advantage of C# 2.0 features, and lots of cleanup.
+1.3.4 (2005-Dec-14):
+  * Re-added support for files with packed bitstream containing real N-VOPs
+    (apparently the XviD 1.1 betas do this).
+1.3.3 (2005-Dec-11):
+  * Fixed bug when unpacking files with missing N-VOPs (caused by cutting/
+    joining).
+  * Removed support for files with packed bitstream containing real N-VOPs to
+    simplify code.
+1.3.2 (2005-Mar-08):
+  * New feature: Video Info now shows how many warp points are actually used
+    (for example, DivX indicates 2 warp points in the VOL, but the 2nd one is
+    never used).
+  * Added detection for corrupt RIFF chunk sizes.
+  * Fixed byte order problem in AVI index on big endian systems (for command
+    line unpacker running on OS X).
+1.3.1 (2005-Jan-06):
+  * Added percent in titlebar of progress window.
+  * Added 1.85:1 display aspect ratio.
+  * Fixed saving AVIs with no index.
+  * Fixed small cosmetic issues in main window.
+1.3.0 (2004-Dec-20):
+  * New feature: option to automatically change user data when unpacking.
+  * Fixed bugs with 'rec ' list indexing.
+  * Added progress bar during load and save.
+  * A file can be loaded from the command line, or by dropping it on the AVI
+    Source text box.
+  * Error checking is less strict (no more "No dummy N-VOP found for packed
+    frame" and "Invalid VOL" errors).
+  * Files are closed sooner, and output file is deleted if an error occurs
+    during save.
+  * Other code improvements and clean-up.
+1.2.0 (2004-Sep-14):
+  * New feature: modification of field order for interlaced videos.
+  * New feature: video information (i.e. whether or not QPel/GMC were used,
+    stats for how many I/B/P/S/N-VOPs were used, list of VOP type and
+    timestamp for each frame, etc.).
+  * Packed bitstream removal can now tell the difference between dummy N-VOPs
+    and real N-VOPs.
+1.1.0 (2004-Jun-24):
+  * New feature: packed bitstream removal.
+  * New feature: userdata modification.
+  * Recognizes frames written in '00db' chunks.
+1.0.0 (2004-Jun-14):
+  * Has a proper GUI.
+  * Warns if the AVI is OpenDML.
+  * Reads the frame width/height from the video (for DAR->PAR calculation).
+  * Writes dwSuggestedBufferSize in the video stream header (it wrote 0
+    before).
+  * Supports 'rec ' lists.
+  * Code has been restructured.

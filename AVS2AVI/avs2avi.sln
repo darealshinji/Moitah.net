@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avs2avi", "avs2avi.vcproj", "{FE0B87E5-718D-488F-95A8-C6429D2463CD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{FE0B87E5-718D-488F-95A8-C6429D2463CD}.Debug.ActiveCfg = Debug|Win32
+		{FE0B87E5-718D-488F-95A8-C6429D2463CD}.Debug.Build.0 = Debug|Win32
+		{FE0B87E5-718D-488F-95A8-C6429D2463CD}.Release.ActiveCfg = Release|Win32
+		{FE0B87E5-718D-488F-95A8-C6429D2463CD}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,43 @@
+1.6.3 (2012-Sep-02):
+  * Supports loading on .NET 4.x runtime (not required; still 2.0 compatible).
+1.6.2 (2011-Apr-06):
+  * Fixed MP3 VBR header incorrectly indicating that its frame has a CRC.
+1.6.1 (2010-Aug-15):
+  * Fixed 0-byte output for CBR MP3 audio less than 64KB.
+  * Detects MP4 files and recommends YAMB/MP4Box.
+  * Work around auto scaling bug in .NET Framework for high DPI compatibility.
+1.6.0 (2009-May-28):
+  * Writes VBR header for VBR MP3s (fixes players showing incorrect duration).
+  * Recognizes format variants added in Flash 9 (MP3 8 kHz and PCM little
+    endian).
+  * Fixes problem with low bitrate Speex.
+1.5.1 (2009-May-26):
+  * Shows suggested cropping for VP6 videos that were mod-16 padded by the
+    encoder.
+  * Separates Speex frames into their own packets to work around buggy
+    decoders, writes multiple packets per Ogg page to reduce overhead.
+1.5.0 (2009-May-25):
+  * Supports Speex (.spx) audio.
+  * Command line version (FLVExtractCL).
+1.4.0 (2008-Nov-16):
+  * Supports H.264/AVC, written as a raw elementary stream.
+  * Supports AAC, written as .aac with ADTS headers.
+  * Extracts VP6 alpha channel to a separate file.
+  * Prompts before overwriting files.
+1.3.0 (2008-Feb-26):
+  * Added dialog that lists the status of all files, replaces the message box
+    that was shown for each file.
+  * Doesn't leave files open upon error.
+  * Better handling of incomplete files.
+  * Changed VP6 FourCC from FLV4 to VP6F.
+  * A few fixes for rare files.
+1.2.1 (2007-Jul-18):
+  * Can extract uncompressed PCM audio.
+1.2.0 (2006-Oct-30):
+  * Improved frame rate calculation.
+  * Doesn't freeze Explorer while extracting.
+1.1.0 (2006-Jul-27):
+  * Ability to write timecode files.
+  * Shows estimated true frame rate (ignores gaps in timestamps).
+1.0.0 (2006-Jul-16):
+  * First release.

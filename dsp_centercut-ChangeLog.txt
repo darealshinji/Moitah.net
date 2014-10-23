@@ -1,0 +1,28 @@
+1.4.0 (2007-Jul-19):
+  * Option to put bass in side channels, useful if your goal is vocal removal.
+  * Improved workaround for Winamp's threading bugs.
+
+1.3.2 (2006-Jul-14):
+  * Another quality tweak.
+
+1.3.1 (2006-Jul-12):
+  * Fixed classic vocal remover which was broken in the previous version.
+
+1.3.0 (2006-Jul-12):
+  * Algorithm enhancement to improve quality (clicking problem is eliminated,
+    echo is significantly reduced).
+  * Rewrote a lot of inefficient code (it runs over twice as fast now).
+
+1.2.0 (2004-Mar-30):
+  * Output is now buffered, which allows larger FHT sizes to be used.
+  * Default FHT size is now 8192, this will reduce warbling but add some slight
+    echo.
+
+1.1.0 (2004-Jan-19):
+  * Added a workaround for the crash bug when switching between options (this
+    is actually a problem with Winamp unloading the DLL too early).
+  * Now supports 8/16/24/32 bit audio (only did 16 bit before).
+  * Code cleanup.
+
+1.0.0 (2004-Jan-11):
+  * First release.

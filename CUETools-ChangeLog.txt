@@ -1,0 +1,88 @@
+1.9.1 (2007-Sep-19):
+ * Added: Configurable WavPack compression mode and extra mode.
+ * Added: Option to preprocess CUE sheets with filename corrector during normal
+   and batch mode.
+ * Settings and Filename Corrector windows are now centered inside main window
+   when opened.
+ * Updated FLAC library to 1.2.1 and cleaned up callback code.
+
+1.9.0 (2007-Aug-04):
+  * Added: Batch mode.
+  * Added: Option to generate output path based on a custom format string.
+  * Added: Tool to correct the filenames within CUE sheets based on the audio
+    files present in the same folder.
+  * Added: Option to preserve HTOA when outputting gaps appended CUE sheets.
+  * Added: Advanced settings window.  Write offset has been moved here, and the
+    FLAC settings can be changed here without having to manually edit the
+    settings file.
+  * Compiled with platform target = x86.  Allows FLAC and WavPack DLLs to be
+    loaded in 64-bit Windows but requires the x86 version of the .NET
+    Framework 2.0.
+
+1.8.0 (2007-Jul-30):
+  * Added: Option to offset the output audio.
+  * Fixed: Error when stopping with FLAC/WavPack output.
+  * Now accepts files that don't end on a CD frame boundary, shows warning.
+  * Updated FLAC library to 1.2.0, uses set_compression_level, and changed
+    padding to 8k.
+
+1.7.1 (2007-Jul-19):
+  * Updated FLAC library to 1.1.4.
+  * Updated WavPack library to 4.41.
+
+1.7.0 (2006-Nov-03):
+  * Added: WavPack support, both read and write.
+
+1.6.0 (2006-Nov-01):
+  * Added: Option to output FLAC files.
+  * Fixed: "Index length cannot be 0" error.
+  * Fixed: Couldn't handle CUE sheets with data tracks.
+  * It's now possible to stop/cancel when writing audio files.
+
+1.5.1 (2006-Mar-01):
+  * Fixed: FLAC files weren't being closed completely.
+  * Fixed: Possible problem opening FLAC files with strange characters in the
+    filename.
+  * Optimized FLAC sample copy loop.
+
+1.5.0 (2006-Feb-28):
+  * Added: Support for reading audio from FLAC files.
+
+1.4.3 (2006-Feb-27):
+  * Fixed: Small range of extended ASCII characters were being changed for
+    filename creation.
+
+1.4.2 (2006-Feb-27):
+  * Fixed: Extended ASCII characters weren't working properly.
+  * Rejects CUE sheets with POSTGAP command.
+
+1.4.1 (2006-Feb-26):
+  * Added: Hidden option to write PREGAP instead of INDEX 00 for the first
+    track of a single file CUE sheet (only when the "Create CUE sheet only"
+    option is used).
+
+1.4.0 (2006-Feb-26):
+  * Added: Converts the WAV files as well by splitting, joining, adding silence
+    to fill gaps, or removing gaps where necessary.
+  * Added: Option to place the output file(s) in a new subdirectory.
+
+1.3.0 (2006-Feb-25):
+  * Added: Conversion to the other 3 CUE sheet styles.
+  * Added: Generates audio filenames inside the CUE sheets from the TITLE and
+    PERFORMER information based on user-specifiable patterns and settings.
+  * ReplayGain information is now removed since it doesn't translate between
+    all the CUE sheet styles.
+
+1.2.0 (2006-Feb-22):
+  * Fixes a bug with writing timestamps over an hour.
+  * Option to generate output filename by appending something to the input
+    filename.
+  * Single WAV filename in the output CUE sheet can be customized.
+
+1.1.0 (2006-Feb-21):
+  * Uses the directory information inside the CUE if it can't find the audio
+    file in the same directory as the CUE.
+  * Able to read the length of FLAC files.
+
+1.0.0 (2006-Feb-18):
+  * First release.

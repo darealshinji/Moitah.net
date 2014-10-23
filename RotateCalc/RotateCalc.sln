@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotateCalc", "RotateCalc.csproj", "{7987AEC2-1D77-45E1-B612-EF8143C9805D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7987AEC2-1D77-45E1-B612-EF8143C9805D}.Debug.ActiveCfg = Debug|.NET
+		{7987AEC2-1D77-45E1-B612-EF8143C9805D}.Debug.Build.0 = Debug|.NET
+		{7987AEC2-1D77-45E1-B612-EF8143C9805D}.Release.ActiveCfg = Release|.NET
+		{7987AEC2-1D77-45E1-B612-EF8143C9805D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

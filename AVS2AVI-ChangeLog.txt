@@ -1,0 +1,74 @@
+v1.39 (2004-Jul-06):
+  * Destination file is now closed immediately after encoding, the XviD status
+    window can be left open without keeping the file unfinished/locked.
+  * Changed the way the last frames are flushed when using b-frames, the last
+    frame may be better quality if it is a b-frame.
+  * XviD status window is now closed when encoding is stopped by Ctrl+C.
+  * Fixed deadlock when stopping with Ctrl+C.
+
+v1.38 (2004-May-23):
+  * Source information: Added frame rate, and removed bit depth for formats
+    other than RGB.
+  * Fixed "No Recompression" not copying all AVISTREAMINFO values (i.e.
+    FourCC).
+  * Removed high priority.
+
+v1.37 (2004-May-01):
+  * Added "-e" switch to exit after compressor selection.  This is useful if
+    you want to save compressor settings ("-s") without actually encoding.
+  * "No Recompression" can now be selected by using "-c null".
+  * "No Recompression" mode uses less memory.
+  * Lots of code restructuring and clean-up, and small display fixes.
+
+v1.36 (2004-Apr-27):
+  * Added option to wait until the XviD status window is closed, use "-x a" to
+    enable for all passes, or "-x l" to enable for the last pass only.
+  * Enabled the "No Recompression" option.
+
+v1.35 (2004-Mar-08):
+  * Uses GetFileSize instead of GetFileSizeEx (should work under Win9x now).
+
+v1.34 (2004-Mar-04):
+  * Now uses internal buffering for the AVI output (it's set it to 512 KB, this
+    should reduce disk activity).
+  * Added "-f" switch for frontend display mode (makes it easier for people
+    writing frontends to parse the info from stdout).
+
+v1.33 (2004-Feb-25):
+  * Handles window messages in the encode thread (fixes XviD status window).
+  * Removed Matroska support.
+
+v1.32 (2004-Feb-23):
+  * Stats are now 'instant' over the last 1-2 minutes instead of 300ms (will be
+    much smoother now).  The overall average is still displayed at the end.
+  * Fractions of a second aren't shown for elapsed time while encoding
+    (clutters up display).
+  * Size of encoded video is now displayed properly (was always 0 before).  Now
+    it will only show 0 when not in the last pass of a multi-pass encode.
+  * Note on the above: the size while encoding is just the size of the video
+    data, at the end of the encoding it will be the total size of the file
+    (including overhead).
+  * Frame count/FPS at the end of encode is now displayed properly.
+  * Path of destination is now relative to the source (i.e. if the source is
+    "c:\stuff\main.avs" and the dest is given as "new.avi", the full dest path
+    will be "c:\stuff\new.avi").  The same is true for the state file.
+  * If no destination is given, it will be the same as the source but with the
+    proper extension (i.e. in the above example, the dest would be
+    "c:\stuff\main.avi").
+  * If the destination has the wrong extension (or no extension), it will be
+    corrected (i.e. if the dest is given as "c:\test.avi" but '-o m' is set,
+    the dest will be changed to "c:\test.avi.mkv").
+  * Checks to make sure the source file exists before starting (this way you
+    won't have to wait until after you select the compressor to find out the
+    filename is wrong).
+  * Checks to make sure you're not trying to overwrite the destination file (if
+    you want to, use the '-w' switch).
+  * Rewrote the command line parsing to support some new features and fix bugs.
+  * Fixed not completely exiting if an error occurred.
+  * Fixed crash if no compressor was selected (i.e. "No Recompression").  It
+    still won't let you output but it exits instead of crashes :).
+  * Displays the name of the format you're outputting to if it's not AVI.
+  * Added option for null output ('-o n'), can be used for speed testing or
+    whatever.
+  * Fixed ReadFrame/EncodeFrame using StopRead instead of Stop.
+  * Misc other display and code cleanups.
