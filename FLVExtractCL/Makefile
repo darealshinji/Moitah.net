@@ -1,20 +1,16 @@
-INCLUDE = 
-LIBDIR  = 
-
 COMPILERFLAGS = -Wall -Wextra -Wcast-align -Wctor-dtor-privacy -Wswitch-enum -Wshadow -Wcast-qual -Winit-self -Wmissing-include-dirs -Woverloaded-virtual -Wnon-virtual-dtor -Wfloat-equal -O3
 
-CC = g++
-CFLAGS = $(COMPILERFLAGS) $(INCLUDE)
+CXX = g++
 LIBRARIES = -lboost_filesystem -lboost_system
 
 .cpp.o:
-	$(CC) $(CFLAGS) $(LIBDIR) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(COMPILERFLAGS) -c $< -o $@
 
 all: FLVExtractCL
 
 FLVExtractCL : FLVExtractCL.o
-	$(CC) $(CFLAGS) -o $@ $(LIBDIR) $^ $(LIBRARIES)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBRARIES)
 
 clean:
-	rm -f FLVExtractCL
+	rm -f flvextract
 	rm -f FLVExtractCL.o
