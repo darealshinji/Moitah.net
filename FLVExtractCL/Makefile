@@ -1,15 +1,16 @@
-COMPILERFLAGS = -Wall -Wextra -Wcast-align -Wctor-dtor-privacy -Wswitch-enum -Wshadow -Wcast-qual -Winit-self -Wmissing-include-dirs -Woverloaded-virtual -Wnon-virtual-dtor -Wfloat-equal -O3
-
-CXX = g++
+CXX := g++
+BUILDFLAGS += -O2 -D_FORTIFY_SOURCE=2 -Wall -Wextra -fstack-protector \
+	--param=ssp-buffer-size=4 -Wformat -Werror=format-security
+LINKERFLAGS = -Wl,-Bsymbolic-functions -Wl,-z,relro
 LIBRARIES = -lboost_filesystem -lboost_system
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(COMPILERFLAGS) -c $< -o $@
+	$(CXX) $(BUILDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 all: FLVExtractCL
 
 FLVExtractCL : FLVExtractCL.o
-	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBRARIES)
+	$(CXX) $(LINKERFLAGS) $(LDFLAGS) -o $@ $^ $(LIBRARIES)
 
 clean:
 	rm -f flvextract
