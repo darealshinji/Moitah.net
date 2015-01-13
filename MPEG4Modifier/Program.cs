@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace JDP {
-	static class Program {
+	internal static class Program {
 		[STAThread]
 		static void Main(string[] args) {
 			Application.EnableVisualStyles();

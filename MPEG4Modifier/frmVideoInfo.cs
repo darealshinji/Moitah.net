@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace JDP {
-	partial class frmVideoInfo : Form {
+	internal partial class frmVideoInfo : Form {
 		private MPEG4FrameModifier _mp4Mod;
 
 		public frmVideoInfo(MPEG4FrameModifier mp4Mod) {

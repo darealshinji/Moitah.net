@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 
 namespace JDP {
-	partial class frmUserData : Form {
+	internal partial class frmUserData : Form {
 		public frmUserData(string action) {
 			InitializeComponent();
 			Program.SetFontAndScaling(this);

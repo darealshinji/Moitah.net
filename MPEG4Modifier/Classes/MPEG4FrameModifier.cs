@@ -1,34 +1,32 @@
-// ****************************************************************************
+// --------------------------------------------------------------------------------
+// Copyright (c) 2004 J.D. Purcell
 //
-// MPEG4 Modifier
-// Copyright (C) 2004-2012  J.D. Purcell (moitah@yahoo.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
 //
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
-// ****************************************************************************
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace JDP {
-	class MPEG4FrameModifier : IFrameModifier {
+	public class MPEG4FrameModifier : IFrameModifier {
 		private IVideoModifier _videoModifier;
 		private int _frameWidth, _frameHeight, _frameIndex;
 		private string _fourCC;
@@ -640,7 +638,7 @@ namespace JDP {
 			// Read PAR info
 			vol.aspect_ratio = bits.Read(4);
 			if (vol.aspect_ratio == (uint)PARType.Custom) {
-				vol.par_width  = bits.Read(8);
+				vol.par_width = bits.Read(8);
 				vol.par_height = bits.Read(8);
 			}
 
@@ -1097,7 +1095,7 @@ namespace JDP {
 		}
 	}
 
-	class BitStream {
+	internal class BitStream {
 		private byte[] _data;
 		private int _pos, _byteLength;
 		private BitStream _copyDest;
@@ -1271,7 +1269,7 @@ namespace JDP {
 		}
 	}
 
-	class MPEG4ChunkReader {
+	internal class MPEG4ChunkReader {
 		private byte[] _data;
 		private int[,] _chunkInfo;
 
@@ -1340,7 +1338,7 @@ namespace JDP {
 		}
 	}
 
-	struct MPEG4UserData {
+	public struct MPEG4UserData {
 		private byte[] _userData;
 
 		public byte[] UserData {
@@ -1381,7 +1379,7 @@ namespace JDP {
 		}
 	}
 
-	struct MPEG4PAR {
+	public struct MPEG4PAR {
 		public PARType Type;
 		public uint Width;
 		public uint Height;
@@ -1435,18 +1433,18 @@ namespace JDP {
 		}
 	}
 
-	class NotMPEG4Exception : Exception {
+	internal class NotMPEG4Exception : Exception {
 		public NotMPEG4Exception(string message) : base(message) {
 		}
 	}
 
-	enum StartCode : uint {
+	internal enum StartCode : uint {
 		VideoObjectLayer = 0x00000120,
 		UserData         = 0x000001B2,
 		VideoObjectPlane = 0x000001B6
 	}
 
-	enum PARType : uint {
+	public enum PARType : uint {
 		VGA_1_1   = 1,
 		PAL_4_3   = 2,
 		NTSC_4_3  = 3,
@@ -1455,7 +1453,7 @@ namespace JDP {
 		Custom    = 15
 	}
 
-	enum VOPType : uint {
+	internal enum VOPType : uint {
 		I_VOP   = 0,
 		P_VOP   = 1,
 		B_VOP   = 2,
@@ -1464,21 +1462,21 @@ namespace JDP {
 		N_VOP_D = 5
 	}
 
-	enum VOLShape : uint {
+	internal enum VOLShape : uint {
 		Rectangular = 0,
 		Binary      = 1,
 		BinaryOnly  = 2,
 		Grayscale   = 3
 	}
 
-	enum Sprite : uint {
+	internal enum Sprite : uint {
 		None   = 0,
 		Static = 1,
 		GMC    = 2
 	}
 
 	[StructLayout(LayoutKind.Auto)]
-	struct VOLInfo {
+	internal struct VOLInfo {
 		public uint ver_id;
 		public uint aspect_ratio;
 		public uint par_width;
@@ -1501,7 +1499,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Auto)]
-	struct VOPInfo {
+	internal struct VOPInfo {
 		public int frame_num;
 		public uint coding_type;
 		public bool coded;

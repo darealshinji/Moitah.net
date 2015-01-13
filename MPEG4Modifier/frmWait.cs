@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 namespace JDP {
-	partial class frmWait : Form {
+	internal partial class frmWait : Form {
 		private string _title;
 		private Thread _workThread;
 		private bool _stop;

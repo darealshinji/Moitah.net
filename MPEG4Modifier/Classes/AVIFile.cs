@@ -1,23 +1,23 @@
-// ****************************************************************************
+// --------------------------------------------------------------------------------
+// Copyright (c) 2004 J.D. Purcell
 //
-// MPEG4 Modifier
-// Copyright (C) 2004-2012  J.D. Purcell (moitah@yahoo.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
 //
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
-// ****************************************************************************
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace JDP {
-	class AVIReader {
+	public class AVIReader {
 		private static readonly uint ckIDLIST = AVIHelper.FourCC("LIST");
 		private static readonly uint ckIDRIFF = AVIHelper.FourCC("RIFF");
 
@@ -566,10 +566,10 @@ namespace JDP {
 		}
 	}
 
-	class AVIWriter {
+	public class AVIWriter {
 		const uint MaxOpenDMLSuperIndexEntries = 256;
 		const uint MaxOpenDMLStandardIndexEntries = 8192;
-		const long MaxAVISize  = 0x7FFFFFFF;
+		const long MaxAVISize = 0x7FFFFFFF;
 		const long MaxAVIXSize = 0x7FFFFFFF;
 
 		private FileStream _fs;
@@ -997,7 +997,8 @@ namespace JDP {
 						break;
 					}
 				}
-			} while (i < chunkList.Count);
+			}
+			while (i < chunkList.Count);
 
 			return blockSize;
 		}
@@ -1117,10 +1118,10 @@ namespace JDP {
 
 	// AVIReader sets Offset to the beginning of the chunk data, AVIWriter sets Offset
 	// to the beginning of the chunk header.
-	struct StreamChunkInfo {
-		public  long Offset;
+	internal struct StreamChunkInfo {
+		public long Offset;
 		private uint SizeAndFlags;
-		public  uint Duration;
+		public uint Duration;
 
 		private static uint KeyFrameFlag = 0x80000000;
 		private static uint SizeBits = 0x7FFFFFFF;
@@ -1146,7 +1147,7 @@ namespace JDP {
 		}
 	}
 
-	static class AVIHelper {
+	internal static class AVIHelper {
 		public static uint FourCC(string fourCC) {
 			byte[] bytes = Encoding.ASCII.GetBytes(fourCC);
 			return (bytes.Length == 4) ? BitConverterLE.ToUInt32(bytes, 0) : 0x20202020;
@@ -1229,14 +1230,14 @@ namespace JDP {
 		}
 	}
 
-	enum AVIStreamType {
+	public enum AVIStreamType {
 		Video,
 		Audio,
 		Other
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVIMAINHEADER {
+	internal struct AVIMAINHEADER {
 		public uint dwMicroSecPerFrame;
 		public uint dwMaxBytesPerSec;
 		public uint dwPaddingGranularity;
@@ -1254,7 +1255,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVISTREAMHEADER {
+	public struct AVISTREAMHEADER {
 		public uint fccType;
 		public uint fccHandler;
 		public uint dwFlags;
@@ -1275,7 +1276,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct BITMAPINFOHEADER {
+	public struct BITMAPINFOHEADER {
 		public uint biSize;
 		public int biWidth;
 		public int biHeight;
@@ -1290,7 +1291,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct WAVEFORMATEX {
+	public struct WAVEFORMATEX {
 		public ushort wFormatTag;
 		public ushort nChannels;
 		public uint nSamplesPerSec;
@@ -1300,7 +1301,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVIOLDINDEXENTRY {
+	internal struct AVIOLDINDEXENTRY {
 		public uint dwChunkID;
 		public uint dwFlags;
 		public uint dwOffset;
@@ -1308,7 +1309,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVISUPERINDEX {
+	internal struct AVISUPERINDEX {
 		public ushort wLongsPerEntry;
 		public byte bIndexSubType;
 		public byte bIndexType;
@@ -1320,14 +1321,14 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVISUPERINDEXENTRY {
+	internal struct AVISUPERINDEXENTRY {
 		public ulong qwOffset;
 		public uint dwSize;
 		public uint dwDuration;
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVISTDINDEX {
+	internal struct AVISTDINDEX {
 		public ushort wLongsPerEntry;
 		public byte bIndexSubType;
 		public byte bIndexType;
@@ -1338,7 +1339,7 @@ namespace JDP {
 	}
 
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	struct AVISTDINDEXENTRY {
+	internal struct AVISTDINDEXENTRY {
 		public uint dwOffset;
 		public uint dwSize;
 	}

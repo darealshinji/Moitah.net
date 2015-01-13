@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using JDP;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Copyright 2004-2012 J.D. Purcell")]
+[assembly: AssemblyCopyright("Copyright " + VersionInfo.CopyrightYears + " J.D. Purcell")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.4.0.5")]
-[assembly: AssemblyFileVersion("1.4.0.5")]
+[assembly: AssemblyVersion(VersionInfo.AssemblyVersion)]
+[assembly: AssemblyFileVersion(VersionInfo.AssemblyVersion)]

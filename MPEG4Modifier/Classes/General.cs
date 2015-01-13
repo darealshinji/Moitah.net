@@ -1,32 +1,44 @@
-// ****************************************************************************
+// --------------------------------------------------------------------------------
+// Copyright (c) 2004 J.D. Purcell
 //
-// MPEG4 Modifier
-// Copyright (C) 2004-2012  J.D. Purcell (moitah@yahoo.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
 //
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
-// ****************************************************************************
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 
 namespace JDP {
-	interface IFrameModifier {
+	public static class VersionInfo {
+		public const string AssemblyVersion = "1.4.0.6";
+		public const string CopyrightYears = "2004-2015";
+		public const string Website = "http://www.moitah.net/";
+
+		public static string DisplayVersion {
+			get {
+				Version ver = new Version(AssemblyVersion);
+				return ver.Major + "." + ver.Minor + "." + ver.Revision;
+			}
+		}
+	}
+
+	public interface IFrameModifier {
 		void SetVideoInfo(int width, int height, string fourCC);
 		void PreviewStart();
 		void PreviewFrame(byte[] data);
@@ -36,11 +48,11 @@ namespace JDP {
 		void ModifyDone();
 	}
 
-	interface IVideoModifier {
+	public interface IVideoModifier {
 		void WriteFrame(byte[] data, bool isKeyFrame);
 	}
 
-	static class General {
+	internal static class General {
 		public static byte[] ConcatByteArrays(List<byte[]> byteArrays) {
 			if (byteArrays.Count == 1) return byteArrays[0];
 
@@ -62,7 +74,7 @@ namespace JDP {
 		}
 	}
 
-	static class StructHelper<T> where T : struct {
+	internal static class StructHelper<T> where T : struct {
 		private static int _sizeOf;
 		private static int[] _map;
 
@@ -188,7 +200,7 @@ namespace JDP {
 		}
 	}
 
-	static class ByteOrder {
+	internal static class ByteOrder {
 		public static ulong Reverse(ulong x) {
 			return
 				((x >> 56) & 0x00000000000000FF) |
@@ -245,7 +257,7 @@ namespace JDP {
 		}
 	}
 
-	static class BitConverterLE {
+	internal static class BitConverterLE {
 		public static ulong ToUInt64(byte[] value, int startIndex) {
 			return
 				((ulong)value[startIndex    ]      ) |
