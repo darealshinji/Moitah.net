@@ -1,11 +1,32 @@
+// --------------------------------------------------------------------------------
+// Copyright (c) 2006 J.D. Purcell
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
+
 using System;
 using System.IO;
 
 namespace JDP {
-	class Program {
-		static bool _autoOverwrite;
+	internal class Program {
+		private static bool _autoOverwrite;
 
-		static int Main(string[] args) {
+		private static int Main(string[] args) {
 			int argCount = args.Length;
 			int argIndex = 0;
 			bool extractVideo = false;
@@ -14,9 +35,9 @@ namespace JDP {
 			string outputDirectory = null;
 			string inputPath;
 
-			Console.WriteLine("FLV Extract CL v" + General.Version);
-			Console.WriteLine("Copyright 2006-2012 J.D. Purcell");
-			Console.WriteLine("http://www.moitah.net/");
+			Console.WriteLine("FLV Extract CL v" + VersionInfo.DisplayVersion);
+			Console.WriteLine("Copyright " + VersionInfo.CopyrightYears + " J.D. Purcell");
+			Console.WriteLine(VersionInfo.Website);
 			Console.WriteLine();
 
 			try {

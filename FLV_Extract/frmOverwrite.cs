@@ -3,8 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace JDP {
-	public partial class frmOverwrite : Form {
-		bool _toAll;
+	internal partial class frmOverwrite : Form {
+		private bool _toAll;
 
 		public frmOverwrite(string path) {
 			InitializeComponent();

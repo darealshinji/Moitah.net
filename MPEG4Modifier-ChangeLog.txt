@@ -1,3 +1,6 @@
+1.4.6 (2015-Jan-10):
+  * Marked as system DPI aware to fix blurry UI with high DPI settings.
+  * Changed license to MIT (was GPL v2).
 1.4.5 (2012-Sep-02):
   * Ability to export custom quantization matrix to .cqm file.
   * Fixed window layout with high DPI settings.

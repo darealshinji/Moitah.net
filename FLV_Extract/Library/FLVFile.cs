@@ -1,23 +1,23 @@
-// ****************************************************************************
+// --------------------------------------------------------------------------------
+// Copyright (c) 2006 J.D. Purcell
 //
-// FLV Extract
-// Copyright (C) 2006-2012  J.D. Purcell (moitah@yahoo.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
 //
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
-// ****************************************************************************
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
@@ -25,13 +25,13 @@ using System.IO;
 using System.Text;
 
 namespace JDP {
-	interface IAudioWriter {
+	internal interface IAudioWriter {
 		void WriteChunk(byte[] chunk, uint timeStamp);
 		void Finish();
 		string Path { get; }
 	}
 
-	interface IVideoWriter {
+	internal interface IVideoWriter {
 		void WriteChunk(byte[] chunk, uint timeStamp, int frameType);
 		void Finish(FractionUInt32 averageFrameRate);
 		string Path { get; }
@@ -40,20 +40,27 @@ namespace JDP {
 	public delegate bool OverwriteDelegate(string destPath);
 
 	public class FLVFile : IDisposable {
-		static readonly string[] _outputExtensions = new string[] { ".avi", ".mp3", ".264", ".aac", ".spx", ".txt" };
+		private static readonly string[] _outputExtensions = new string[] { ".avi", ".mp3", ".264", ".aac", ".spx", ".txt" };
 
-		string _inputPath, _outputDirectory, _outputPathBase;
-		OverwriteDelegate _overwrite;
-		FileStream _fs;
-		long _fileOffset, _fileLength;
-		IAudioWriter _audioWriter;
-		IVideoWriter _videoWriter;
-		TimeCodeWriter _timeCodeWriter;
-		List<uint> _videoTimeStamps;
-		bool _extractAudio, _extractVideo, _extractTimeCodes;
-		bool _extractedAudio, _extractedVideo, _extractedTimeCodes;
-		FractionUInt32? _averageFrameRate, _trueFrameRate;
-		List<string> _warnings;
+		private string _inputPath;
+		private string _outputDirectory;
+		private string _outputPathBase;
+		private OverwriteDelegate _overwrite;
+		private FileStream _fs;
+		private long _fileOffset, _fileLength;
+		private IAudioWriter _audioWriter;
+		private IVideoWriter _videoWriter;
+		private TimeCodeWriter _timeCodeWriter;
+		private List<uint> _videoTimeStamps;
+		private bool _extractAudio;
+		private bool _extractVideo;
+		private bool _extractTimeCodes;
+		private bool _extractedAudio;
+		private bool _extractedVideo;
+		private bool _extractedTimeCodes;
+		private FractionUInt32? _averageFrameRate;
+		private FractionUInt32? _trueFrameRate;
+		private List<string> _warnings;
 
 		public FLVFile(string path) {
 			_inputPath = path;
@@ -433,7 +440,7 @@ namespace JDP {
 		}
 	}
 
-	class DummyAudioWriter : IAudioWriter {
+	internal class DummyAudioWriter : IAudioWriter {
 		public DummyAudioWriter() {
 		}
 
@@ -450,7 +457,7 @@ namespace JDP {
 		}
 	}
 
-	class DummyVideoWriter : IVideoWriter {
+	internal class DummyVideoWriter : IVideoWriter {
 		public DummyVideoWriter() {
 		}
 
@@ -467,22 +474,22 @@ namespace JDP {
 		}
 	}
 
-	class MP3Writer : IAudioWriter {
-		string _path;
-		FileStream _fs;
-		List<string> _warnings;
-		List<byte[]> _chunkBuffer;
-		List<uint> _frameOffsets;
-		uint _totalFrameLength;
-		bool _isVBR;
-		bool _delayWrite;
-		bool _hasVBRHeader;
-		bool _writeVBRHeader;
-		int _firstBitRate;
-		int _mpegVersion;
-		int _sampleRate;
-		int _channelMode;
-		uint _firstFrameHeader;
+	internal class MP3Writer : IAudioWriter {
+		private string _path;
+		private FileStream _fs;
+		private List<string> _warnings;
+		private List<byte[]> _chunkBuffer;
+		private List<uint> _frameOffsets;
+		private uint _totalFrameLength;
+		private bool _isVBR;
+		private bool _delayWrite;
+		private bool _hasVBRHeader;
+		private bool _writeVBRHeader;
+		private int _firstBitRate;
+		private int _mpegVersion;
+		private int _sampleRate;
+		private int _channelMode;
+		private uint _firstFrameHeader;
 
 		public MP3Writer(string path, List<string> warnings) {
 			_path = path;
@@ -645,22 +652,22 @@ namespace JDP {
 		}
 	}
 
-	class SpeexWriter : IAudioWriter {
-		const string _vendorString = "FLV Extract";
-		const uint _sampleRate = 16000;
-		const uint _msPerFrame = 20;
-		const uint _samplesPerFrame = _sampleRate / (1000 / _msPerFrame);
-		const int _targetPageDataSize = 4096;
+	internal class SpeexWriter : IAudioWriter {
+		private const string _vendorString = "FLV Extract";
+		private const uint _sampleRate = 16000;
+		private const uint _msPerFrame = 20;
+		private const uint _samplesPerFrame = _sampleRate / (1000 / _msPerFrame);
+		private const int _targetPageDataSize = 4096;
 
-		string _path;
-		FileStream _fs;
-		int _serialNumber;
-		List<OggPacket> _packetList;
-		int _packetListDataSize;
-		byte[] _pageBuff;
-		int _pageBuffOffset;
-		uint _pageSequenceNumber;
-		ulong _granulePosition;
+		private string _path;
+		private FileStream _fs;
+		private int _serialNumber;
+		private List<OggPacket> _packetList;
+		private int _packetListDataSize;
+		private byte[] _pageBuff;
+		private int _pageBuffOffset;
+		private uint _pageSequenceNumber;
+		private ulong _granulePosition;
 
 		public SpeexWriter(string path, int serialNumber) {
 			_path = path;
@@ -850,18 +857,18 @@ namespace JDP {
 			WriteToPage(BitConverterLE.GetBytes(data), 0, 8);
 		}
 
-		class OggPacket {
+		private class OggPacket {
 			public ulong GranulePosition;
 			public byte[] Data;
 		}
 	}
 
-	class AACWriter : IAudioWriter {
-		string _path;
-		FileStream _fs;
-		int _aacProfile;
-		int _sampleRateIndex;
-		int _channelConfig;
+	internal class AACWriter : IAudioWriter {
+		private string _path;
+		private FileStream _fs;
+		private int _aacProfile;
+		private int _sampleRateIndex;
+		private int _channelConfig;
 
 		public AACWriter(string path) {
 			_path = path;
@@ -925,12 +932,12 @@ namespace JDP {
 		}
 	}
 
-	class RawH264Writer : IVideoWriter {
-		static readonly byte[] _startCode = new byte[] { 0, 0, 0, 1 };
+	internal class RawH264Writer : IVideoWriter {
+		private static readonly byte[] _startCode = new byte[] { 0, 0, 0, 1 };
 
-		string _path;
-		FileStream _fs;
-		int _nalLengthSize;
+		private string _path;
+		private FileStream _fs;
+		private int _nalLengthSize;
 
 		public RawH264Writer(string path) {
 			_path = path;
@@ -1001,10 +1008,10 @@ namespace JDP {
 		}
 	}
 
-	class WAVWriter : IAudioWriter {
-		string _path;
-		WAVTools.WAVWriter _wr;
-		int blockAlign;
+	internal class WAVWriter : IAudioWriter {
+		private string _path;
+		private WAVTools.WAVWriter _wr;
+		private int blockAlign;
 
 		public WAVWriter(string path, int bitsPerSample, int channelCount, int sampleRate) {
 			_path = path;
@@ -1027,16 +1034,19 @@ namespace JDP {
 		}
 	}
 
-	class AVIWriter : IVideoWriter {
-		string _path;
-		BinaryWriter _bw;
-		int _codecID;
-		int _width, _height, _frameCount;
-		uint _moviDataSize, _indexChunkSize;
-		List<uint> _index;
-		bool _isAlphaWriter;
-		AVIWriter _alphaWriter;
-		List<string> _warnings;
+	internal class AVIWriter : IVideoWriter {
+		private string _path;
+		private BinaryWriter _bw;
+		private int _codecID;
+		private int _width;
+		private int _height;
+		private int _frameCount;
+		private uint _moviDataSize;
+		private uint _indexChunkSize;
+		private List<uint> _index;
+		private bool _isAlphaWriter;
+		private AVIWriter _alphaWriter;
+		private List<string> _warnings;
 
 		// Chunk:          Off:  Len:
 		//
@@ -1365,9 +1375,9 @@ namespace JDP {
 		}
 	}
 
-	class TimeCodeWriter {
-		string _path;
-		StreamWriter _sw;
+	internal class TimeCodeWriter {
+		private string _path;
+		private StreamWriter _sw;
 
 		public TimeCodeWriter(string path) {
 			_path = path;

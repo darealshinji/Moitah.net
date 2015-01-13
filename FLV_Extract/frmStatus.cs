@@ -6,15 +6,15 @@ using System.Threading;
 using System.Windows.Forms;
 
 namespace JDP {
-	public partial class frmStatus : Form {
-		Thread _workThread;
-		volatile string[] _paths;
-		volatile bool _stop;
-		volatile bool _extractVideo;
-		volatile bool _extractAudio;
-		volatile bool _extractTimeCodes;
-		bool _overwriteAll;
-		bool _overwriteNone;
+	internal partial class frmStatus : Form {
+		private Thread _workThread;
+		private volatile string[] _paths;
+		private volatile bool _stop;
+		private volatile bool _extractVideo;
+		private volatile bool _extractAudio;
+		private volatile bool _extractTimeCodes;
+		private bool _overwriteAll;
+		private bool _overwriteNone;
 
 		public frmStatus(string[] paths, bool extractVideo, bool extractAudio, bool extractTimeCodes) {
 			InitializeComponent();
@@ -179,11 +179,11 @@ namespace JDP {
 				btnOK.Enabled = true;
 			});
 		}
-	}
 
-	enum IconIndex {
-		OK,
-		Warning,
-		Error
+		private enum IconIndex {
+			OK,
+			Warning,
+			Error
+		}
 	}
 }

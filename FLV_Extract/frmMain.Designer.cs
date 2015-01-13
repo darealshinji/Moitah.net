@@ -34,7 +34,7 @@ namespace JDP {
 			// 
 			// btnAbout
 			// 
-			this.btnAbout.Location = new System.Drawing.Point(112, 132);
+			this.btnAbout.Location = new System.Drawing.Point(132, 132);
 			this.btnAbout.Name = "btnAbout";
 			this.btnAbout.Size = new System.Drawing.Size(63, 24);
 			this.btnAbout.TabIndex = 2;
@@ -46,7 +46,7 @@ namespace JDP {
 			// 
 			this.lblInstructions.Location = new System.Drawing.Point(8, 8);
 			this.lblInstructions.Name = "lblInstructions";
-			this.lblInstructions.Size = new System.Drawing.Size(168, 56);
+			this.lblInstructions.Size = new System.Drawing.Size(188, 56);
 			this.lblInstructions.TabIndex = 0;
 			this.lblInstructions.Text = "Drop FLV files here.\r\n\r\nOutput files are written in the same folder as the FLVs.";
 			this.lblInstructions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -100,7 +100,7 @@ namespace JDP {
 			// 
 			this.AllowDrop = true;
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(183, 164);
+			this.ClientSize = new System.Drawing.Size(203, 164);
 			this.Controls.Add(this.grpExtract);
 			this.Controls.Add(this.lblInstructions);
 			this.Controls.Add(this.btnAbout);
@@ -110,9 +110,9 @@ namespace JDP {
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FLV Extract";
 			this.TopMost = true;
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
 			this.Load += new System.EventHandler(this.frmMain_Load);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmMain_DragDrop);
-			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
 			this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmMain_DragEnter);
 			this.grpExtract.ResumeLayout(false);
 			this.ResumeLayout(false);

@@ -1,42 +1,48 @@
-// ****************************************************************************
+// --------------------------------------------------------------------------------
+// Copyright (c) 2006 J.D. Purcell
 //
-// FLV Extract
-// Copyright (C) 2006-2012  J.D. Purcell (moitah@yahoo.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
 //
-// This program is free software; you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-//
-// ****************************************************************************
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// --------------------------------------------------------------------------------
 
 using System;
 using System.Reflection;
 
 namespace JDP {
-	public static class General {
-		public static string Version {
+	public static class VersionInfo {
+		public const string AssemblyVersion = "1.6.0.4";
+		public const string CopyrightYears = "2006-2015";
+		public const string Website = "http://www.moitah.net/";
+
+		public static string DisplayVersion {
 			get {
-				Version ver = Assembly.GetExecutingAssembly().GetName().Version;
+				Version ver = new Version(AssemblyVersion);
 				return ver.Major + "." + ver.Minor + "." + ver.Revision;
 			}
 		}
+	}
 
+	internal static class General {
 		public static void CopyBytes(byte[] dst, int dstOffset, byte[] src) {
 			Buffer.BlockCopy(src, 0, dst, dstOffset, src.Length);
 		}
 	}
 
-	public static class BitHelper {
+	internal static class BitHelper {
 		public static int Read(ref ulong x, int length) {
 			int r = (int)(x >> (64 - length));
 			x <<= length;
@@ -84,7 +90,7 @@ namespace JDP {
 		}
 	}
 
-	public static class BitConverterBE {
+	internal static class BitConverterBE {
 		public static ulong ToUInt64(byte[] value, int startIndex) {
 			return
 				((ulong)value[startIndex    ] << 56) |
@@ -141,7 +147,7 @@ namespace JDP {
 		}
 	}
 
-	public static class BitConverterLE {
+	internal static class BitConverterLE {
 		public static byte[] GetBytes(ulong value) {
 			byte[] buff = new byte[8];
 			buff[0] = (byte)(value      );
@@ -172,8 +178,8 @@ namespace JDP {
 		}
 	}
 
-	public static class OggCRC {
-		static uint[] _lut = new uint[256];
+	internal static class OggCRC {
+		private static uint[] _lut = new uint[256];
 
 		static OggCRC() {
 			for (uint i = 0; i < 256; i++) {

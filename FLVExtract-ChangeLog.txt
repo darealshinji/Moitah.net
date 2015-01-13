@@ -1,3 +1,6 @@
+1.6.4 (2015-Jan-10):
+  * Marked as system DPI aware to fix blurry UI with high DPI settings.
+  * Changed license to MIT (was GPL v2).
 1.6.3 (2012-Sep-02):
   * Supports loading on .NET 4.x runtime (not required; still 2.0 compatible).
 1.6.2 (2011-Apr-06):
