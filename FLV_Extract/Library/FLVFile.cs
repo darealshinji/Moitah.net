@@ -887,6 +887,9 @@ namespace JDP {
 				_sampleRateIndex = BitHelper.Read(ref bits, 4);
 				_channelConfig = BitHelper.Read(ref bits, 4);
 
+				if (_aacProfile == 4) // HE-AAC
+					_aacProfile = 1; // Uses LC profile + SBR
+
 				if ((_aacProfile < 0) || (_aacProfile > 3))
 					throw new Exception("Unsupported AAC profile.");
 				if (_sampleRateIndex > 12)

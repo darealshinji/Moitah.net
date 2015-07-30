@@ -24,7 +24,7 @@ using System.Reflection;
 
 namespace JDP {
 	public static class VersionInfo {
-		public const string AssemblyVersion = "1.6.0.4";
+		public const string AssemblyVersion = "1.6.0.5";
 		public const string CopyrightYears = "2006-2015";
 		public const string Website = "http://www.moitah.net/";
 

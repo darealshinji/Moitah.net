@@ -1,3 +1,5 @@
+1.6.5 (2015-May-22):
+  * Supports files containing HE-AAC audio.
 1.6.4 (2015-Jan-10):
   * Marked as system DPI aware to fix blurry UI with high DPI settings.
   * Changed license to MIT (was GPL v2).
