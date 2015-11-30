@@ -1,19 +1,19 @@
-CXX := g++
-_CXXFLAGS = -O2 -Wall -Wextra -fstack-protector-all -D_FORTIFY_SOURCE=2
-_LDFLAGS = -Wl,-z,relro
-_LIBS = -lboost_filesystem -lboost_system
+# Linux/gmake makefile
 
-.cpp.o:
-	$(CXX) $(_CXXFLAGS) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+BIN = FLVExtractCL
 
-all: FLVExtractCL
+CXX = g++
+BUILDFLAGS = -O2 -Wall -Wextra -fstack-protector-all -D_FORTIFY_SOURCE=2 $(CXXFLAGS) -Wl,-z,relro $(LDFLAGS)
+LIBS = -lboost_filesystem -lboost_system
 
-FLVExtractCL : FLVExtractCL.o
-	$(CXX) $(_LDFLAGS) $(LDFLAGS) -o $@ $^ $(_LIBS)
+
+all: $(BIN)
+
+$(BIN): $(BIN).cpp
+	$(CXX) $(BUILDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	rm -f FLVExtractCL
-	rm -f FLVExtractCL.o
+	rm -f $(BIN)
 
 distclean: clean
 

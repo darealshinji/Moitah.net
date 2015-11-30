@@ -1,0 +1,24 @@
+
+EXE32 = FLVExtractCL.exe
+EXE64 = FLVExtractCL64.exe
+
+CXX   = i686-w64-mingw32-g++
+CXX64 = x86_64-w64-mingw32-g++
+
+BUILDFLAGS = -O3 -Wall -Wextra $(CXXFLAGS) -s -static-libgcc -static-libstdc++ $(LDFLAGS)
+LIBS = -Wl,-Bstatic -lboost_filesystem-mt -lboost_system-mt -Wl,-Bdynamic $(XLIBS)
+
+
+all: $(EXE32) $(EXE64)
+
+$(EXE32): FLVExtractCL.cpp
+	$(CXX) -m32 $(BUILDFLAGS) -o $@ $^ $(LIBS)
+
+$(EXE64): FLVExtractCL.cpp
+	$(CXX64) -m64 $(BUILDFLAGS) -o $@ $^ $(LIBS)
+
+clean:
+	rm -f *.exe
+
+distclean: clean
+
