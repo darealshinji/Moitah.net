@@ -1206,7 +1206,11 @@ struct FLVFile
     if (_fileLength < 4 || ReadUInt32() != 0x464C5601)
     {
       if (_fileLength >= 8 && ReadUInt32() == 0x66747970)
-        throw std::runtime_error("This is an MP4 file. YAMB or MP4Box can be used to extract streams.");
+        throw std::runtime_error("This is an MP4 file. "
+#ifdef _WIN32
+                                 "YAMB or " //only available for Windows
+#endif
+                                 "MP4Box can be used to extract streams.");
       else
         throw std::runtime_error("This isn't an FLV file.");
     }
